@@ -36,6 +36,8 @@ jobs:
           unityVersion: 2020.1.6f1
           testMode: playmode
           artifactsPath: playmode-artifacts
+          # https://github.com/webbertakken/unity-actions/issues/84
+          customParameters: '-nographics'
 
       - uses: actions/upload-artifact@v1
         with:
