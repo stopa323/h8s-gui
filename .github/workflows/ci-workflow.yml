@@ -1,0 +1,35 @@
+name: Continuous Integration - Code
+
+on: 
+  push:
+    branches-ignore:
+      - master
+      - stage
+  pull_request:
+    branches:
+      - master
+      - stage
+
+env:
+  UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+
+jobs:
+  unit:
+    name: Unit Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set Up environment
+        uses: actions/checkout@v2
+
+      - name: Run tests
+        uses: webbertakken/unity-test-runner@v1.7
+        id: tests
+        with:
+          unityVersion: 2020.1.6f1
+          testMode: playmode
+          artifactsPath: playmode-artifacts
+
+      - uses: actions/upload-artifact@v1
+        with:
+          name: Test results
+          path: ${{ steps.tests.outputs.artifactsPath }}
