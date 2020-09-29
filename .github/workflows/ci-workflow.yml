@@ -33,7 +33,7 @@ jobs:
         uses: webbertakken/unity-test-runner@v1.4
         id: tests
         with:
-          unityVersion: 2019.2.11f
+          unityVersion: 2019.2.11f1
           testMode: playmode
           artifactsPath: playmode-artifacts
 
