@@ -20,9 +20,17 @@ jobs:
     steps:
       - name: Set Up environment
         uses: actions/checkout@v2
+      
+      - name: Cache
+        uses: actions/cache@v2.1.1
+        with:
+          path: ./Library
+          key: Library-
+          restore-keys: |
+            Library-
 
       - name: Run tests
-        uses: webbertakken/unity-test-runner@v1.7
+        uses: webbertakken/unity-test-runner@v1.4
         id: tests
         with:
           unityVersion: 2020.1.6f1
