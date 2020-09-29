@@ -33,11 +33,9 @@ jobs:
         uses: webbertakken/unity-test-runner@v1.4
         id: tests
         with:
-          unityVersion: 2020.1.6f1
+          unityVersion: 2019.2.11f
           testMode: playmode
           artifactsPath: playmode-artifacts
-          # https://github.com/webbertakken/unity-actions/issues/84
-          customParameters: '-nographics'
 
       - uses: actions/upload-artifact@v1
         with:
