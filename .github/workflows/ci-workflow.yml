@@ -17,29 +17,29 @@ jobs:
   unit:
     name: Unit Tests
     runs-on: ubuntu-latest
-    steps:
-      - name: Set Up environment
-        uses: actions/checkout@v2
-        with:
-          lfs: true
+    steps: []
+#       - name: Set Up environment
+#         uses: actions/checkout@v2
+#         with:
+#           lfs: true
       
-      - name: Cache
-        uses: actions/cache@v2.1.1
-        with:
-          path: Library
-          key: Library-
-          restore-keys: |
-            Library-
+#       - name: Cache
+#         uses: actions/cache@v2.1.1
+#         with:
+#           path: Library
+#           key: Library-
+#           restore-keys: |
+#             Library-
 
-      - name: Run tests
-        uses: webbertakken/unity-test-runner@v1.4
-        id: tests
-        with:
-          unityVersion: 2019.2.11f1
-          testMode: all
-          artifactsPath: all-artifacts
+#       - name: Run tests
+#         uses: webbertakken/unity-test-runner@v1.4
+#         id: tests
+#         with:
+#           unityVersion: 2019.2.11f1
+#           testMode: all
+#           artifactsPath: all-artifacts
 
-      - uses: actions/upload-artifact@v1
-        with:
-          name: Test results
-          path: ${{ steps.tests.outputs.artifactsPath }}
+#       - uses: actions/upload-artifact@v1
+#         with:
+#           name: Test results
+#           path: ${{ steps.tests.outputs.artifactsPath }}
