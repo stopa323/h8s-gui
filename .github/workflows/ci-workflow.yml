@@ -20,11 +20,13 @@ jobs:
     steps:
       - name: Set Up environment
         uses: actions/checkout@v2
+        with:
+          lfs: true
       
       - name: Cache
         uses: actions/cache@v2.1.1
         with:
-          path: ./Library
+          path: Library
           key: Library-
           restore-keys: |
             Library-
@@ -34,8 +36,8 @@ jobs:
         id: tests
         with:
           unityVersion: 2019.2.11f1
-          testMode: playmode
-          artifactsPath: playmode-artifacts
+          testMode: all
+          artifactsPath: all-artifacts
 
       - uses: actions/upload-artifact@v1
         with:
