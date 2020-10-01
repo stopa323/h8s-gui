@@ -1,30 +1,33 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace h8s
 {
-    public class ResourceController : MonoBehaviour
+    [CreateAssetMenu(fileName = "ResourceController", menuName = "Scriptables/Controllers/ResourceController")]
+    public class ResourceController : ScriptableObject
     {
-        public static ResourceController Instance { get; private set; }
+        public GameObject ResourcePrefab;
 
-        [SerializeField] private GameObject resourcePrefab;
+        /* Container for all resource elements on the blackboard */
+        public List<element.Resource> Registry { get; private set; }
 
         private void Awake()
         {
-            if (Instance != null && Instance != this) { Destroy(gameObject); }
-            else { Instance = this; }
+            Registry = new List<element.Resource>();
         }
 
-        public void CreateResource(Vector2 position)
+        public void CreateResource(Vector2 position, RectTransform nodeContainer)
         {
             Debug.Log(string.Format("Creating resource at {0}", position));
 
             // Spawn resource object attached to node container
-            var node_obj = Instantiate(resourcePrefab, transform) as GameObject;
-
+            var resource_object = Instantiate(ResourcePrefab, nodeContainer) as GameObject;
+            
             // Move node to requested position
-            var spawn_position = Utility.CanvasPositionFromScreen(position);
-            Debug.Log(spawn_position);
-            node_obj.transform.localPosition = new Vector3(spawn_position.x, spawn_position.y);
+            resource_object.transform.localPosition = new Vector3(position.x, position.y);
+
+            var resource = resource_object.GetComponent<element.Resource>();
+            Registry.Add(resource);
         }
     }
 }
